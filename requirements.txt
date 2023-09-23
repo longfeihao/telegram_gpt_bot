@@ -1,0 +1,5 @@
+openai==0.28.0
+python-telegram-bot==20.5
+PyYAML==6.0.1
+PyYAML==6.0.1
+utils==1.0.1
