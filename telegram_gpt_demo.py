@@ -47,9 +47,19 @@ async def clear_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 async def listmodel_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    models = '\n'.join(get_models())
+    global MODEL
+    available_models = '\n'.join([f'- {e}' for e in get_models()])
 
-    await update.message.reply_text(models)
+    cur_model = MODEL
+
+    info = f"""Available Model:
+{available_models}
+
+Current Model:
+{cur_model}
+    """
+
+    await update.message.reply_text(info)
 
 
 async def setmodel_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -58,7 +68,7 @@ async def setmodel_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     if len(args) == 0:
         await update.message.reply_text("Please input model name!")
         return
-    
+
     valid_models = set(get_models())
 
     if args[0] not in valid_models:
